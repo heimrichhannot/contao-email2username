@@ -3,11 +3,17 @@
 $arrDca = &$GLOBALS['TL_DCA']['tl_member'];
 
 /**
+ * Callbacks
+ */
+$arrDca['config']['onsubmit_callback']['setUsernameFromEmail'] = array('tl_member_email2username', 'setUsernameFromEmail');
+
+/**
  * Fields
  */
-$arrDca['config']['onsubmit_callback']['setUsernameFromEmail'] = array('tl_member_mail2username', 'setUsernameFromEmail');
+$arrDca['fields']['username']['eval']['disabled'] = true;
+$arrDca['fields']['username']['eval']['mandatory'] = false;
 
-class tl_member_mail2username extends \Backend
+class tl_member_email2username extends \Backend
 {
 
 	public function setUsernameFromEmail(&$objDc)
