@@ -20,6 +20,9 @@ class tl_member_email2username extends \Backend
 	{
 		if (TL_MODE == 'FE')
 		{
+			if (!$objDc->activeRecord->getTable())
+				return;
+				
 			$objMember = $objDc;
 			
 			$objMember->username = $objMember->email;
