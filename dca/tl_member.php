@@ -18,26 +18,21 @@ class tl_member_email2username extends \Backend
 
 	public function setUsernameFromEmail(&$objDc)
 	{
-		if (TL_MODE == 'FE')
+		if (TL_MODE == 'FE' && !$objDc->activeRecord->getTable())
 		{
-			if (!$objDc->activeRecord->getTable())
-				return;
-				
-			$objMember = $objDc;
-			
-			$objMember->username = $objMember->email;
+			return;
 		}
-		else
-		{
-			$objMember = \MemberModel::findByPk($objDc->activeRecord->id);
-			$objMember->refresh();
 
+		$objMember = \MemberModel::findByPk($objDc->activeRecord->id);
+		$objMember->refresh();
+		$objMember->username = $objDc->activeRecord->email;
+
+		if(TL_MODE == 'BE')
+		{
 			$objDc->activeRecord->username = $objDc->activeRecord->email;
-			$objMember->username = $objDc->activeRecord->email;
 		}
 
 		$objMember->save();
 	}
 
 }
-
