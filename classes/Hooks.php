@@ -35,7 +35,9 @@ class Hooks extends \Controller
 		switch($strTable)
 		{
 			case 'tl_member':
-				if(($objUser = \FrontendUser::getInstance()->findBy('LOWER(username)', strtolower($strUser))) !== false)
+				$objUser = \FrontendUser::getInstance();
+
+				if($objUser->findBy('LOWER(username)', strtolower($strUser)) !== false)
 				{
 					// set post user name to the users username
 					\Input::setPost('username', $objUser->username);
