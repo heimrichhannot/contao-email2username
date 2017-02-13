@@ -12,17 +12,17 @@
 /**
  * Register the namespaces
  */
-ClassLoader::addNamespaces(array
-(
-	'HeimrichHannot',
-));
+ClassLoader::addNamespaces(
+    [
+	'HeimrichHannot',]
+);
 
 
 /**
  * Register the classes
  */
-ClassLoader::addClasses(array
-(
+ClassLoader::addClasses(
+    [
 	// Classes
-	'HeimrichHannot\Email2Username\Hooks' => 'system/modules/email2username/classes/Hooks.php',
-));
+	'HeimrichHannot\Email2Username\Hooks' => 'system/modules/email2username/classes/Hooks.php',]
+);

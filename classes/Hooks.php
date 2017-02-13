@@ -14,41 +14,53 @@ namespace HeimrichHannot\Email2Username;
 class Hooks extends \Controller
 {
 
-	/**
-	 * This Hook provides case-insensitive contao-login by email usernames
-	 *
-	 * RFC 5321, section-2.3.11 says that email addresses should be treated as case-insensitive
-	 *
-	 * @param $strUser
-	 * @param $strPassword
-	 * @param $strTable
-	 *
-	 * @return bool
-	 */
-	public function importUserHook($strUser, $strPassword, $strTable)
-	{
-		if(!\Validator::isEmail($strUser))
-		{
-			return false;
-		}
-		
-		switch($strTable)
-		{
-			case 'tl_member':
-				$objUser = \FrontendUser::getInstance();
+    /**
+     * This Hook provides case-insensitive contao-login by email usernames
+     *
+     * RFC 5321, section-2.3.11 says that email addresses should be treated as case-insensitive
+     *
+     * @param $strUser
+     * @param $strPassword
+     * @param $strTable
+     *
+     * @return bool
+     */
+    public function importUserHook($strUser, $strPassword, $strTable)
+    {
+        if (!\Validator::isEmail($strUser))
+        {
+            return false;
+        }
 
-				if($objUser->findBy('LOWER(username)', strtolower($strUser)) !== false)
-				{
-					// set post user name to the users username
-					\Input::setPost('username', $objUser->username);
+        switch ($strTable)
+        {
+            case 'tl_member':
+                $objMember = \Database::getInstance()->prepare('SELECT * from tl_member WHERE lower(username) = ?')->limit(1)->execute($strUser);
 
-					return true;
-				}
-			break;
-		}
+                if ($objMember->numRows > 0)
+                {
+                    // set post user name to the users username
+                    \Input::setPost('username', $objMember->username);
 
-		return false;
-	}
+                    return true;
+                }
+                break;
+            case
+            'tl_user':
+                $objUser = \Database::getInstance()->prepare('SELECT * from tl_user WHERE lower(username) = ?')->limit(1)->execute($strUser);
+
+                if ($objUser->numRows > 0)
+                {
+                    // set post user name to the users username
+                    \Input::setPost('username', $objUser->username);
+
+                    return true;
+                }
+                break;
+        }
+
+        return false;
+    }
 
 
 }
