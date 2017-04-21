@@ -15,19 +15,16 @@ $arrDca['fields']['username']['eval']['mandatory'] = false;
 
 class tl_user_email2username extends \Backend
 {
-    public function setUsernameFromEmail(&$objDc)
+    public function setUsernameFromEmail(\DataContainer $objDc)
     {
-        if (!$objDc->activeRecord->email)
-        {
+        if (($objMember = \UserModel::findByPk($objDc->id)) === null || !$objMember->email)
             return;
-        }
 
-        $objUser = \UserModel::findByPk($objDc->id);
-        $objUser->refresh();
+        $objMember->refresh();
 
-        $objUser->username             = $objDc->activeRecord->email;
-        $objDc->activeRecord->username = $objDc->activeRecord->email;
+        $objMember->username           = $objMember->email;
+        $objDc->activeRecord->username = $objMember->email;
 
-        $objUser->save();
+        $objMember->save();
     }
 }
