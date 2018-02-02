@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.1.4] - 2018-02-02
+
+### Fixed
+- DataContainer typing issue in combination with ModulePersonalData
+
 ## [1.1.3] - 2017-06-08
 
 ### Fixed

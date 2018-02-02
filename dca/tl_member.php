@@ -15,7 +15,8 @@ $arrDca['fields']['username']['eval']['mandatory'] = false;
 
 class tl_member_email2username extends \Backend
 {
-    public function setUsernameFromEmail(\DataContainer $objDc)
+    // $objDc not typed since ModulePersonalData passes in a FrontendUser (not a DataContainer) instance
+    public function setUsernameFromEmail($objDc)
     {
         if (($objMember = \MemberModel::findByPk($objDc->id)) === null || !$objMember->email)
             return;
