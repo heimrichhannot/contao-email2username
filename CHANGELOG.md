@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.2.1] - 2018-04-04
+
+### Changed
+* change compability to contao 3 only
+
+Note: 1.2.0 contained no changes
+
 ## [1.1.5] - 2018-02-02
 
 ### Fixed
