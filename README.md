@@ -1,8 +1,12 @@
-# Email2Username
+# Email2Username Module for Contao 3
 
-Adds a simple callback to set the username from email.
+Adds a simple callback to set users' email addresses as their usernames.
 
-> If you want contao 4 compability, use the [Bundle](https://github.com/heimrichhannot/contao-email2username-bundle)
+> [!WARNING]
+> 
+> This Contao 3 module was superseded by the Contao 4 Bundle [heimrichhannot/contao-email2username-bundle](https://github.com/heimrichhannot/contao-email2username-bundle).
+>
+> This repository is no longer maintained.
 
 ## Features
 
